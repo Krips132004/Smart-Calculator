@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #output {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            min-height: 150px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>💻 Smart Calculator</h1>
+<div>
+    <button onclick="startCalculator()">Start Calculator</button>
+</div>
+<div id="output">Output will appear here...</div>
+
+<script>
+    function arithmeticCalc(num1, num2, operator) {
+        switch (operator) {
+            case '+': return num1 + num2;
+            case '-': return num1 - num2;
+            case '*': return num1 * num2;
+            case '/': return num2 !== 0 ? num1 / num2 : 'Error: Division by zero';
+            case '%': return num2 !== 0 ? num1 % num2 : 'Error: Division by zero';
+            default: return 'Invalid operator';
+        }
+    }
+
+    function square(num) {
+        return num * num;
+    }
+
+    function cube(num) {
+        return num * num * num;
+    }
+
+    function factorial(n) {
+        if (n < 0) return 'Error: Negative number';
+        return (n === 0 || n === 1) ? 1 : n * factorial(n - 1);
+    }
+
+    function isEven(num) {
+        return num % 2 === 0 ? 'Even' : 'Odd';
+    }
+
+    function startCalculator() {
+        let choice;
+        do {
+            choice = parseInt(prompt(
+                `📌 Smart Calculator Menu:\n
+                1. Arithmetic Calculator
+                2. Square & Cube Calculator
+                3. Factorial Calculator
+                4. Even/Odd Checker
+                5. Exit\n
+                Enter your choice:`));
+
+            switch (choice) {
+                case 1:
+                    let num1 = parseFloat(prompt("Enter first number:"));
+                    let num2 = parseFloat(prompt("Enter second number:"));
+                    let op = prompt("Enter operator (+, -, *, /, %):");
+                    let result1 = arithmeticCalc(num1, num2, op);
+                    console.log(`Arithmetic Result: ${result1}`);
+                    document.getElementById("output").innerHTML = `<b>Arithmetic Result:</b> ${result1}`;
+                    alert(`Arithmetic Result: ${result1}`);
+                    break;
+
+                case 2:
+                    let num = parseFloat(prompt("Enter a number:"));
+                    let sq = square(num);
+                    let cb = cube(num);
+                    console.log(`Square: ${sq}, Cube: ${cb}`);
+                    document.getElementById("output").innerHTML = `<b>Square:</b> ${sq} <br> <b>Cube:</b> ${cb}`;
+                    alert(`Square: ${sq} | Cube: ${cb}`);
+                    break;
+
+                case 3:
+                    let n = parseInt(prompt("Enter a number:"));
+                    let fact = factorial(n);
+                    console.log(`Factorial: ${fact}`);
+                    document.getElementById("output").innerHTML = `<b>Factorial:</b> ${fact}`;
+                    alert(`Factorial: ${fact}`);
+                    break;
+
+                case 4:
+                    let checkNum = parseInt(prompt("Enter a number:"));
+                    let type = isEven(checkNum);
+                    console.log(`${checkNum} is ${type}`);
+                    document.getElementById("output").innerHTML = `<b>${checkNum} is ${type}</b>`;
+                    alert(`${checkNum} is ${type}`);
+                    break;
+
+                case 5:
+                    alert("Exiting Smart Calculator. Goodbye!");
+                    break;
+
+                default:
+                    alert("Invalid choice! Please try again.");
+            }
+        } while (choice !== 5);
+    }
+</script>
+
+</body>
+</html>
